@@ -15,7 +15,7 @@ def fib_bad(n):
   else:
     return 1
 
-
+# random comment
 def main():
   with open("func_perf.csv", 'w', newline='') as csvfile:
     csvwriter = csv.writer(csvfile)

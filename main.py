@@ -1,4 +1,6 @@
-from time import thread_time
+import csv
+from time import perf_counter
+
 
 def fact(n):
   if n > 0:
@@ -6,18 +8,32 @@ def fact(n):
   else:
     return 1
 
+
 def fib_bad(n):
   if n > 1:
     return fib_bad(n-1) + fib_bad(n-2)
   else:
     return 1
 
+
 def main():
-  for i in range(40):
-    exe_time = thread_time()
-    fib_val = fib_bad(i)
-    exe_time = thread_time() - exe_time
-    print(f"{i}:\t\t{fib_val}\t\tin{exe_time}")
+  with open("func_perf.csv", 'w', newline='') as csvfile:
+    csvwriter = csv.writer(csvfile)
+    for i in range(50):
+
+      print(f"Running iteration {i}...")
+      
+      exe_time_fib = perf_counter()
+      fib_val = fib_bad(i)
+      exe_time_fib = perf_counter() - exe_time_fib
+
+      exe_time_fact = perf_counter()
+      fact_val = fact(i)
+      exe_time_fact = perf_counter() - exe_time_fact
+      
+      csvwriter.writerow([i, fib_val, exe_time_fib, fact_val, exe_time_fact])
+
+    print("Done!")
 
 if __name__ == "__main__":
   main()

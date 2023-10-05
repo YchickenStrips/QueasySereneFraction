@@ -15,7 +15,21 @@ def fib_bad(n):
   else:
     return 1
 
-# random comment
+def fib_new(n):
+a=1
+b=1
+print(a,b,end=" ")
+while(n-2):
+    c=a+b
+    a=b
+    b=c
+    print(c,end=" ")
+    n=n-1
+
+
+
+
+
 def main():
   with open("func_perf.csv", 'w', newline='') as csvfile:
     csvwriter = csv.writer(csvfile)
@@ -27,6 +41,7 @@ def main():
       fib_val = fib_bad(i)
       exe_time_fib = perf_counter() - exe_time_fib
 
+
       exe_time_fact = perf_counter()
       fact_val = fact(i)
       exe_time_fact = perf_counter() - exe_time_fact
@@ -37,3 +52,4 @@ def main():
 
 if __name__ == "__main__":
   main()
+
